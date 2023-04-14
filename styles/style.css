@@ -1,0 +1,51 @@
+body {
+  background-color: #15181b;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.left-menu {
+    min-width: 250px;
+    margin: 10px;
+    padding: 0;
+    margin-right: 10px;
+}
+
+.input-menu {
+  color: white;
+  max-width: 160px;
+}
+
+canvas {
+  min-height: 100px;
+  max-height: 100px;
+}
+
+h4, h5 {
+  color: white;
+  margin: 0;
+  margin-top: 0.2em;
+}
+
+.MathJax {
+  margin: 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  margin: 0;
+}
+
+#p1Label {
+  font-weight: 400;
+}

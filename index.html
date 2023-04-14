@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="scripts/graphs/graph.js"></script>
+    <script defer src="scripts/graphs/data-graph.js"></script>
+    <script defer src="scripts/graphs/coding-data-graph.js"></script>
+    <script defer src="scripts/graphs/fourier-graph.js"></script>
+    <script defer src="scripts/graphs/inverse-fourier-graph.js"></script>
+    <script defer src="scripts/graphs/eye-diagram-graph.js"></script>
+    <script defer src="scripts/graphs/demodulated-data-graph.js"></script>
+    <script defer src="scripts/graphs/decoded-data-graph.js"></script>
+
+    <script defer src="scripts/coding.js"></script>
+    <script defer src="scripts/decoding.js"></script>
+    <script defer src="scripts/fourier.js"></script>
+    <script defer src="scripts/complex.js"></script>
+    <script defer src="scripts/app.js"></script>
+
+    <script defer src="scripts/tests/unit_tests.js"></script>
+    <script defer src="scripts/tests/end_to_end_tests.js"></script>
+    <script defer src="scripts/tests/test_vector.js"></script>
+    <script defer src="scripts/tests/complex.js"></script>
+
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link href="styles/unicons.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/dropdown.css">
+    <link rel="stylesheet" href="styles/slider.css">
+    <link rel="stylesheet" href="styles/canvas.css">
+    <link rel="stylesheet" href="styles/style.css">
+
+
+    <title>Baseband Communcation</title>
+</head>
+<body onload="init()">
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Non-return-to-zero level</h4>
+            <div>
+                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                    <h5>Time period</h5>
+                    <input type="range" autocomplete="off" min="10" max="200" value="100" class="slider Wave2slider" id="dataWaveTimePeriod" oninput="dataWave.timePeriod = Math.round(value);" style="margin-left:10px" ondblclick="dataWave.timePeriod = Math.round(100); value = 100; MathJax.typeset();">
+                </div>
+            </div>
+
+            <div>
+                <h5>Entropy</h5>
+                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                    <h4 id="p1Label" style="text-align: center;">P(1) = 0.5</h4>
+                    <input type="range" autocomplete="off" min="0" max="1" value="0.5" step="0.01" class="slider Wave1slider" id="dataWaveProbability" oninput='updateProbability(value); roundedProbability=Math.round( value * 100 ) / 100;' style="margin-left:10px" ondblclick="value = 0.5; updateProbability(value)">
+                </div>
+            </div>
+        </div>
+        <canvas id="dataCanvas"></canvas>
+    </div>
+
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Encoded</h4>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <label id="selected-encoding-scheme-label">Non-return-to-zero mark</label>
+                    <i class="uil uil-arrow-down"></i>
+
+                </button>
+                    
+                <div class="dropdown-content">
+                  <a onclick="updateEncodingFunction(nrzm); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Non-return-to-zero mark</a>
+                  <a onclick="updateEncodingFunction(returnToZero); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Return to zero</a>
+                  <a onclick="updateEncodingFunction(manchester); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Manchester coding</a>
+                  <a onclick="updateEncodingFunction(bipolar); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Bipolar coding</a>
+                  <a onclick="updateEncodingFunction(mlt3); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Multi-level Transmit 3</a>
+                </div>
+              </div>
+        </div>
+        <canvas id="encodedCanvas"></canvas>
+    </div>
+
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Fourier</h4>
+            <div>
+                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                    <h5>Brick Filter Threshold:</h5>
+                    <h4 id="FrequencyThresholdLabel">\[f(k<50) = 0\]</h4>
+                    <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
+                </div>
+            </div>
+        </div>
+        <canvas id="fourierCanvas"></canvas>
+    </div>
+
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Inverse Fourier</h4>
+            <div>
+                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                    <h5>Gaussian Noise</h5>
+                    <input type="range" autocomplete="off" min="0" max="1" value="0" step="0.01" class="slider Wave4slider" id="dataWaveTimePeriod" oninput="inverseFourierWave.noiseLevel = value;" style="margin-left:10px" ondblclick="value = 0; inverseFourierWave.noiseLevel = value;">
+                </div>
+            </div>
+        </div>
+        
+        <canvas id="inverseFourierCanvas"></canvas>
+    </div>
+
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Eye Diagram</h4>
+        </div>
+        <canvas id="eyeDiagramCanvas"></canvas>
+    </div>
+
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Demodulated</h4>
+        </div>
+        <canvas id="demodulatedCanvas"></canvas>
+    </div>
+
+    
+    <div style="display: flex;">
+        <div class="left-menu">
+            <h4>Decoded</h4>
+        </div>
+        <canvas id="decodedCanvas"></canvas>
+    </div>
+
+
+    
+</body>
+</html>
