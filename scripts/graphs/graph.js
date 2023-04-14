@@ -101,6 +101,8 @@ class Graph {
         let highestPoint = this.highestPoint;
         let lowestPoint = this.lowestPoint;
 
+        this.ctx.strokeStyle = '#66ccff'
+
         highestPoint = this.scaleDataPointForDisplay(highestPoint);
         lowestPoint = this.scaleDataPointForDisplay(lowestPoint);
 
@@ -108,8 +110,9 @@ class Graph {
             this.ctx.moveTo(i, highestPoint);
             this.ctx.lineTo(i, lowestPoint);
         }
-        
         this.ctx.stroke();
+        this.ctx.strokeStyle = '#ffffff'
+        this.ctx.save();
     }
 
     removeTimePeriod() {

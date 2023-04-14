@@ -65,13 +65,15 @@ class DecodedDataGraph extends EncodedDataGraph {
 
             dataPoint = this.scaleDataPointForDisplay(dataPoint);
 
-            if (dataPoint != prevDataPoint) {
+            if (dataPoint != prevDataPoint && index != 0 && index != data.length-1) {
                 this.ctx.lineTo(index*timePeriod, this.scaleDataPointForDisplay(averageValue));
             }
 
             if (dataPoint == 'X') {
                 this.ctx.strokeStyle = '#ff0000';
             }
+            
+                
             this.ctx.lineTo(index*timePeriod, dataPoint);
             this.ctx.lineTo((index+1)*timePeriod, dataPoint);
 
