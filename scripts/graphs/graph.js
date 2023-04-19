@@ -126,8 +126,9 @@ class Graph {
 
 
     onClickGraph(event) {
+        console.log(event)
         // Find which time segment is being targeted
-        let mouseRelativePosition = Math.floor(event.offsetX/(66.5*dataWave.timePeriod/100));
+        let mouseRelativePosition = Math.floor(event.offsetX/(53.5*dataWave.timePeriod/100));
         //let timeSegment = Math.floor(mouseRelativePosition / dataWave.timePeriod);
         dataWave.data[mouseRelativePosition] = !dataWave.data[mouseRelativePosition];
         replotAllGraphs();
