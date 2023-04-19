@@ -1,4 +1,12 @@
 /**
+ * Takes in a data array and returns the NRZ-L Decoding of the data
+ * @param {Array} data 
+ */
+function decodeNrzl(nrzlData) {
+    return nrzlData;
+}
+
+/**
  * Takes in an array of data and returns the Return To Zero Ddecoding of the array.
  * When a 1 followed by a 0 is encountered a 1 will be decoded
  * When a 0 followe by a 0 is encountered a 0 will be decoded

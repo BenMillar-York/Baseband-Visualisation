@@ -11,6 +11,8 @@ class DecodedDataGraph extends EncodedDataGraph {
                 return decodeBipolar;
             case mlt3:
                 return decodeMlt3;
+            case nrzl:
+                return decodeNrzl;
             default:
                 return decodeReturnToZero;
         }

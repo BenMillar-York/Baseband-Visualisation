@@ -1,5 +1,13 @@
 
 /**
+ * Takes in an array of data and returns it as the data is already in an NRZ-L format
+ * @param {Array} data 
+ */
+function nrzl(data) {
+    return data;
+}
+
+/**
  * Takes in an array of data and returns the Return To Zero Coding of the array.
  * When a 1 data point is encountered the wave will remain at 1 then return to 0
  * @param {Array} data 

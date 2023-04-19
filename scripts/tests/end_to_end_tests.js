@@ -37,6 +37,9 @@ class EndToEndTest {
             case mlt3:
                 textLabel.innerHTML = "Multi-level Transmit 3";
                 break;
+            case nrzl:
+                textLabel.innerHTML = "Non-return-to-zero level"
+                break;
             default:
                 textLabel.innerHTML = "Undefined";
                 break;

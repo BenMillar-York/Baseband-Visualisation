@@ -85,7 +85,9 @@ class Graph {
     }
 
     update() {
+        
         this.plot();
+        //this.plotAxis();
         return true;
     }
 
@@ -121,7 +123,7 @@ class Graph {
         this.ctx.clearRect(0, 0, this.width, this.height);
         
         this.ctx.stroke();
-        this.plot();
+        this.update();
     }
 
 
@@ -132,6 +134,21 @@ class Graph {
         //let timeSegment = Math.floor(mouseRelativePosition / dataWave.timePeriod);
         dataWave.data[mouseRelativePosition] = !dataWave.data[mouseRelativePosition];
         replotAllGraphs();
+    }
+
+    plotAxis() {
+        this.ctx.beginPath();
+
+        this.ctx.strokeStyle = '#ffffff'
+
+        this.ctx.moveTo(5, 30);
+        this.ctx.lineTo(5, this.canvas.height);
+
+        this.ctx.moveTo(5, this.canvas.height);
+        this.ctx.lineTo(this.canvas.width, this.canvas.height);
+
+        this.ctx.stroke();
+        this.ctx.save();
     }
 
 }
