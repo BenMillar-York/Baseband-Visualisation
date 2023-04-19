@@ -91,6 +91,10 @@ class InverseFourierGraph extends FourierGraph {
         fourierWave.plot();
         demodulatedWave.plot();
         decodedWave.plot();
+        let SNR = 1/newNoiseLevel;
+        SNR = SNR.toFixed(2);
+        document.getElementById('NoiseLabel').innerText = String.raw`\[SNR = ${SNR}\]`;
+        MathJax.typeset();
     }
 
     get noiseLevel() {

@@ -9,7 +9,7 @@ class EyeDiagramGraph extends InverseFourierGraph {
     }
 
     update() {
-        this.height = 150;
+        //this.height = 150;
         let data = this._dataSource.data;
         this._data = data;
         this._dataLength = data.length;

@@ -8,9 +8,10 @@ class Graph {
     constructor(canvas) {
         this.canvas = canvas;
         this.width = 2399;
-        this.height = 150;
+        //this.height = 150;
         this.ctx.lineWidth = 2.5;
         this.ctx.strokeStyle = "#ffffff"
+
         graphs.push(this);
     }
 

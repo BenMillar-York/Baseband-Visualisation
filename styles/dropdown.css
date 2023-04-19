@@ -7,21 +7,21 @@
     background: none;
     color: white;
     padding: 10px;
-    font-size: 15px;
+    font-size: 1.5vh;
     border: none;
     min-width: 200px;
     text-align: left;
   }
   a {
-    font-size: 15px;
+    font-size: 1.5vh;
   }
 
   .uil {
-    font-size: 20px;
+    font-size: 2vh;
   }
 
   .uil-arrow-down {
-    vertical-align:text-top;
+    vertical-align:middle;
   }
   
   /* The container <div> - needed to position the dropdown content */

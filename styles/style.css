@@ -5,6 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  min-height: 600px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -34,25 +35,34 @@ body {
   max-width: 160px;
 }
 
-canvas {
-  min-height: 10px;
-  max-height: 100px;
-}
-
 h4, h5 {
   color: white;
   margin: 0;
   margin-top: 0.2em;
 }
 
+h4 {
+  font-size: 1.5vh;
+}
+
+h5 {
+  margin-top: 0.5vh;
+  font-size: 1.2vh;
+}
+
 .MathJax {
   margin: 0;
+  font-size: 1.5vh !important;
 }
 
 mjx-container[jax="CHTML"][display="true"] {
-  margin: 0;
+  margin: 0 !important;
+
+  padding-top: 0.5vh !important;
+  padding-bottom: 0.5vh !important;
 }
 
 #p1Label {
   font-weight: 400;
+  font-size: 1.4vh;
 }
