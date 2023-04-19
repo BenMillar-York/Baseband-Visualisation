@@ -36,97 +36,99 @@
     <title>Baseband Communcation</title>
 </head>
 <body onload="init()">
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Non-return-to-zero level</h4>
-            <div>
-                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                    <h5>Time period</h5>
-                    <input type="range" autocomplete="off" min="10" max="200" value="100" class="slider Wave2slider" id="dataWaveTimePeriod" oninput="dataWave.timePeriod = Math.round(value);" style="margin-left:10px" ondblclick="dataWave.timePeriod = Math.round(100); value = 100; MathJax.typeset();">
+    <div class="content">
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Non-return-to-zero level</h4>
+                <div>
+                    <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                        <h5>Time period</h5>
+                        <input type="range" autocomplete="off" min="10" max="200" value="100" class="slider Wave2slider" id="dataWaveTimePeriod" oninput="dataWave.timePeriod = Math.round(value);" style="margin-left:10px" ondblclick="dataWave.timePeriod = Math.round(100); value = 100; MathJax.typeset();">
+                    </div>
+                </div>
+
+                <div>
+                    <h5>Entropy</h5>
+                    <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                        <h4 id="p1Label" style="text-align: center;">P(1) = 0.5</h4>
+                        <input type="range" autocomplete="off" min="0" max="1" value="0.5" step="0.01" class="slider Wave1slider" id="dataWaveProbability" oninput='updateProbability(value); roundedProbability=Math.round( value * 100 ) / 100;' style="margin-left:10px" ondblclick="value = 0.5; updateProbability(value)">
+                    </div>
                 </div>
             </div>
+            <canvas id="dataCanvas"></canvas>
+        </div>
 
-            <div>
-                <h5>Entropy</h5>
-                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                    <h4 id="p1Label" style="text-align: center;">P(1) = 0.5</h4>
-                    <input type="range" autocomplete="off" min="0" max="1" value="0.5" step="0.01" class="slider Wave1slider" id="dataWaveProbability" oninput='updateProbability(value); roundedProbability=Math.round( value * 100 ) / 100;' style="margin-left:10px" ondblclick="value = 0.5; updateProbability(value)">
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Encoded</h4>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <label id="selected-encoding-scheme-label">Non-return-to-zero mark</label>
+                        <i class="uil uil-arrow-down"></i>
+
+                    </button>
+                        
+                    <div class="dropdown-content">
+                    <a onclick="updateEncodingFunction(nrzm); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Non-return-to-zero mark</a>
+                    <a onclick="updateEncodingFunction(returnToZero); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Return to zero</a>
+                    <a onclick="updateEncodingFunction(manchester); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Manchester coding</a>
+                    <a onclick="updateEncodingFunction(bipolar); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Bipolar coding</a>
+                    <a onclick="updateEncodingFunction(mlt3); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Multi-level Transmit 3</a>
+                    </div>
                 </div>
             </div>
+            <canvas id="encodedCanvas"></canvas>
         </div>
-        <canvas id="dataCanvas"></canvas>
-    </div>
 
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Encoded</h4>
-            <div class="dropdown">
-                <button class="dropbtn">
-                    <label id="selected-encoding-scheme-label">Non-return-to-zero mark</label>
-                    <i class="uil uil-arrow-down"></i>
-
-                </button>
-                    
-                <div class="dropdown-content">
-                  <a onclick="updateEncodingFunction(nrzm); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Non-return-to-zero mark</a>
-                  <a onclick="updateEncodingFunction(returnToZero); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Return to zero</a>
-                  <a onclick="updateEncodingFunction(manchester); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Manchester coding</a>
-                  <a onclick="updateEncodingFunction(bipolar); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Bipolar coding</a>
-                  <a onclick="updateEncodingFunction(mlt3); document.getElementById('selected-encoding-scheme-label').innerHTML = this.innerHTML;">Multi-level Transmit 3</a>
-                </div>
-              </div>
-        </div>
-        <canvas id="encodedCanvas"></canvas>
-    </div>
-
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Fourier</h4>
-            <div>
-                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                    <h5>Brick Filter Threshold:</h5>
-                    <h4 id="FrequencyThresholdLabel">\[f(k<50) = 0\]</h4>
-                    <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Fourier</h4>
+                <div>
+                    <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                        <h5>Brick Filter Threshold:</h5>
+                        <h4 id="FrequencyThresholdLabel">\[f(k<50) = 0\]</h4>
+                        <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
+                    </div>
                 </div>
             </div>
+            <canvas id="fourierCanvas"></canvas>
         </div>
-        <canvas id="fourierCanvas"></canvas>
-    </div>
 
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Inverse Fourier</h4>
-            <div>
-                <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                    <h5>Gaussian Noise</h5>
-                    <input type="range" autocomplete="off" min="0" max="1" value="0" step="0.01" class="slider Wave4slider" id="dataWaveTimePeriod" oninput="inverseFourierWave.noiseLevel = value;" style="margin-left:10px" ondblclick="value = 0; inverseFourierWave.noiseLevel = value;">
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Inverse Fourier</h4>
+                <div>
+                    <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
+                        <h5>Gaussian Noise</h5>
+                        <input type="range" autocomplete="off" min="0" max="1" value="0" step="0.01" class="slider Wave4slider" id="dataWaveTimePeriod" oninput="inverseFourierWave.noiseLevel = value;" style="margin-left:10px" ondblclick="value = 0; inverseFourierWave.noiseLevel = value;">
+                    </div>
                 </div>
             </div>
+            
+            <canvas id="inverseFourierCanvas"></canvas>
         </div>
+
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Eye Diagram</h4>
+            </div>
+            <canvas id="eyeDiagramCanvas"></canvas>
+        </div>
+
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Demodulated</h4>
+            </div>
+            <canvas id="demodulatedCanvas"></canvas>
+        </div>
+
         
-        <canvas id="inverseFourierCanvas"></canvas>
-    </div>
-
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Eye Diagram</h4>
+        <div style="display: flex;">
+            <div class="left-menu">
+                <h4>Decoded</h4>
+            </div>
+            <canvas id="decodedCanvas"></canvas>
         </div>
-        <canvas id="eyeDiagramCanvas"></canvas>
-    </div>
-
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Demodulated</h4>
-        </div>
-        <canvas id="demodulatedCanvas"></canvas>
-    </div>
-
-    
-    <div style="display: flex;">
-        <div class="left-menu">
-            <h4>Decoded</h4>
-        </div>
-        <canvas id="decodedCanvas"></canvas>
     </div>
 
 
