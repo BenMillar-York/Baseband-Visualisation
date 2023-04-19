@@ -1,8 +1,7 @@
 canvas {
     min-height: 10px;
     max-height: 10vh;
-    max-width: 85vw;
-    min-width: 85vw;
+    width: calc(97vw - 200px - 1vw);
 }  
 
 #eyeDiagramCanvas {
