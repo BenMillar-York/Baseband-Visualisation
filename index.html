@@ -88,8 +88,8 @@
                 <div>
                     <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
                         <h5>Brick Filter Threshold:</h5>
-                        <h4 id="FrequencyThresholdLabel">\[f(k<50) = 0\]</h4>
-                        <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
+                        <h4 id="FrequencyThresholdLabel">\[f(k<50Hz) = 0\]</h4>
+                        <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}Hz) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}Hz) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
                     </div>
                 </div>
             </div>
