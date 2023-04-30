@@ -12,6 +12,7 @@
     <script defer src="scripts/graphs/eye-diagram-graph.js"></script>
     <script defer src="scripts/graphs/demodulated-data-graph.js"></script>
     <script defer src="scripts/graphs/decoded-data-graph.js"></script>
+    <script defer src="scripts/graphs/fourier-graph-display.js"></script>
 
     <script defer src="scripts/coding.js"></script>
     <script defer src="scripts/decoding.js"></script>
@@ -94,8 +95,10 @@
                     </div>
                 </div>
             </div>
-            <canvas id="fourierCanvas"></canvas>
+            <canvas id="fourierCanvasDisplay"></canvas>
         </div>
+
+        <canvas id="fourierCanvas" style="display: none;"></canvas>
 
         <div style="display: flex;">
             <div class="left-menu">

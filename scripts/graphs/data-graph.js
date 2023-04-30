@@ -46,5 +46,7 @@ function updateProbability(probability1) {
     document.getElementById('P1Label').innerText = String.raw`\[P(1) = ${probability1}\]`;
     MathJax.typeset();
     dataWave.data = [];
-    dataWave.data = generateRandomData(64, probability1)
+    dataWave.data = generateRandomData(64, probability1);
+    DataProbability1 = probability1;
+    fourierWaveDisplay.resetData();
 }

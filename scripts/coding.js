@@ -131,4 +131,5 @@ function changeLineCoding(codingScheme, self) {
 
     dataWave.setCodingScheme( codingScheme);
     dataWave.needsRefresh = true;
+    fourierWaveDisplay.resetData();
 }

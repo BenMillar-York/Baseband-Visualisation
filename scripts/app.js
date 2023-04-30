@@ -7,10 +7,15 @@ function init() {
     fourierWave = new FourierGraph(document.getElementById('fourierCanvas'));
     fourierWave.dataFunction = sample_then_dft;
     fourierWave.dataSource = encodedWave;
-
+    
     inverseFourierWave = new InverseFourierGraph(document.getElementById('inverseFourierCanvas'));
     inverseFourierWave.dataFunction = filter_then_inverse;
     inverseFourierWave.dataSource = fourierWave;
+
+    fourierWaveDisplay = new FourierGraphDisplay(document.getElementById('fourierCanvasDisplay'));
+    setInterval(function(){ 
+        fourierWaveDisplay.runNextIteration()  
+    }, 50);
 
     eyeDiagramWave = new EyeDiagramGraph(document.getElementById('eyeDiagramCanvas'));
     eyeDiagramWave.dataSource = inverseFourierWave;
@@ -24,5 +29,6 @@ function init() {
 
     dataWave.data = generateRandomData(64, 0.5);
 
+    invertColourScheme();
 }
 
