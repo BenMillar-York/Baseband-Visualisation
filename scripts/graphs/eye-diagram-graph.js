@@ -29,7 +29,7 @@ class EyeDiagramGraph extends InverseFourierGraph {
 
     plot() {
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#ffffff"
+        this.ctx.strokeStyle = lineColour;
         this.ctx.clearRect(0, 0, this.width, this.height);
 
         let data = this.data;

@@ -1,5 +1,12 @@
+:root {
+  --bg-colour: #15181b;
+  --text-colour: white;
+  --dropdown-bg-colour: '#111111';
+  --dropdown-item-bg-colour: '#222222';
+}
+
 body {
-  background-color: #15181b;
+  background-color: var(--bg-colour);
   padding: 0px;
   margin: 0px;
   display: flex;
@@ -34,12 +41,12 @@ body {
 }
 
 .input-menu {
-  color: white;
+  color: var(--text-colour);
   max-width: 10vw;
 }
 
 h4, h5 {
-  color: white;
+  color: var(--text-colour);
   margin: 0;
   margin-top: 0.2em;
 }

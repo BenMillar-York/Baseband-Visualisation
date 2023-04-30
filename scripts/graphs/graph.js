@@ -10,8 +10,7 @@ class Graph {
         this.width = 2399;
         //this.height = 150;
         this.ctx.lineWidth = 2.5;
-        this.ctx.strokeStyle = "#ffffff"
-
+        this.ctx.strokeStyle = lineColour;
         graphs.push(this);
     }
 
@@ -104,7 +103,7 @@ class Graph {
         let highestPoint = this.highestPoint;
         let lowestPoint = this.lowestPoint;
 
-        this.ctx.strokeStyle = '#66ccff'
+        this.ctx.strokeStyle = timePeriodColour;
 
         highestPoint = this.scaleDataPointForDisplay(highestPoint);
         lowestPoint = this.scaleDataPointForDisplay(lowestPoint);
@@ -114,7 +113,7 @@ class Graph {
             this.ctx.lineTo(i, lowestPoint);
         }
         this.ctx.stroke();
-        this.ctx.strokeStyle = '#ffffff'
+        this.ctx.strokeStyle = lineColour;
         this.ctx.save();
     }
 
@@ -131,9 +130,9 @@ class Graph {
         
         const rect = this.getBoundingClientRect();
         console.log(rect)
-        const mousePosition = (event.clientX - rect.left) / dataWave.timePeriod;
+        const mousePosition = (event.clientX - rect.left) / rect.width * dataWave.timePeriod;
         console.log(mousePosition);
-        const targetBit = mousePosition / 0.486;
+        const targetBit = Math.floor(mousePosition / 4.19);
         console.log(targetBit);
         // Find which time segment is being targeted
         let mouseRelativePosition = Math.floor(targetBit);
@@ -145,7 +144,7 @@ class Graph {
     plotAxis() {
         this.ctx.beginPath();
 
-        this.ctx.strokeStyle = '#ffffff'
+        this.ctx.strokeStyle = lineColour;
 
         this.ctx.moveTo(5, 30);
         this.ctx.lineTo(5, this.canvas.height);
@@ -183,4 +182,11 @@ function replotAllGraphs() {
     graphs.forEach(graph => { 
         graph.update();
     })
+}
+
+function changeColourOfAllGraphs() {
+    graphs.forEach(graph => { 
+        graph.ctx.strokeStyle = lineColour;
+    })
+    replotAllGraphs();
 }

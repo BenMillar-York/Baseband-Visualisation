@@ -1,5 +1,3 @@
-
-
 function init() {
     dataWave = new DataGraph(document.getElementById('dataCanvas'));
     encodedWave = new EncodedDataGraph(document.getElementById('encodedCanvas'));
@@ -17,13 +15,14 @@ function init() {
     eyeDiagramWave = new EyeDiagramGraph(document.getElementById('eyeDiagramCanvas'));
     eyeDiagramWave.dataSource = inverseFourierWave;
 
-    demodulatedWave = new DemodulatedDataGraph(document.getElementById('demodulatedCanvas'))
+    demodulatedWave = new DemodulatedDataGraph(document.getElementById('demodulatedCanvas'));
     demodulatedWave.dataSource = inverseFourierWave;
 
-    decodedWave = new DecodedDataGraph(document.getElementById('decodedCanvas'))
+    decodedWave = new DecodedDataGraph(document.getElementById('decodedCanvas'));
     decodedWave.dataSource = demodulatedWave;
     decodedWave.codingFunction = decodeReturnToZero;
 
     dataWave.data = generateRandomData(64, 0.5);
 
 }
+

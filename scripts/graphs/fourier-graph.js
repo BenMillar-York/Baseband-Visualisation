@@ -44,6 +44,7 @@ class FourierGraph extends Graph {
     plot() {
         this.ctx.beginPath();
         this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.strokeStyle = lineColour;
 
         let data = this.data;
         let half_length = Math.ceil(data.length / 2);

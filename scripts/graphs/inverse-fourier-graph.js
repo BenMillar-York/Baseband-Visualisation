@@ -70,7 +70,7 @@ class InverseFourierGraph extends FourierGraph {
         this.ctx.beginPath();
         let highestPoint = this.highestPoint;
         let lowestPoint = this.lowestPoint;
-        this.ctx.strokeStyle = '#66ccff'
+        this.ctx.strokeStyle = timePeriodColour;
 
         highestPoint = this.scaleDataPointForDisplay(highestPoint);
         lowestPoint = this.scaleDataPointForDisplay(lowestPoint);
@@ -81,7 +81,7 @@ class InverseFourierGraph extends FourierGraph {
         }
         
         this.ctx.stroke();
-        this.ctx.strokeStyle = '#ffffff'
+        this.ctx.strokeStyle = lineColour;
     }
 
     set noiseLevel(newNoiseLevel) {
