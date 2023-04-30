@@ -130,9 +130,9 @@ class Graph {
         
         const rect = this.getBoundingClientRect();
         console.log(rect)
-        const mousePosition = (event.clientX - rect.left) / rect.width * dataWave.timePeriod;
-        console.log(mousePosition);
-        const targetBit = Math.floor(mousePosition / 4.19);
+        const mousePosition = (event.clientX - rect.left) / rect.width / dataWave.timePeriod;
+        console.log(mousePosition * 10000);
+        const targetBit = Math.floor(mousePosition * 10000 / 4.19);
         console.log(targetBit);
         // Find which time segment is being targeted
         let mouseRelativePosition = Math.floor(targetBit);
