@@ -99,7 +99,7 @@ class FourierGraphDisplay extends Graph {
         let half_length = Math.ceil(data.length / 2);
         data = data.slice(0, half_length);
 
-        let xScaling = (1/data.length) * SAMPLES_PER_BIT * 128 * 1.6;
+        let xScaling = (1/data.length) * SAMPLES_PER_BIT * 128 * 1.7;
 
         // Scale for display resolution
         //xScaling = xScaling * (this.canvas.width / (data.length * 2));

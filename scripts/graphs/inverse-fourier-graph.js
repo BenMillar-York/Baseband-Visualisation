@@ -1,3 +1,5 @@
+let SignalToNoiseRatio = 1;
+
 class InverseFourierGraph extends FourierGraph {
 
     _brickWallFilterThreshold = 100;
@@ -60,6 +62,7 @@ class InverseFourierGraph extends FourierGraph {
         fourierWave.plot();
         demodulatedWave.plot();
         decodedWave.plot();
+        calcEbNo();
     }
 
     get filterThreshold () {
@@ -94,7 +97,8 @@ class InverseFourierGraph extends FourierGraph {
         let SNR = 1/newNoiseLevel;
         SNR = SNR.toFixed(2);
         document.getElementById('NoiseLabel').innerText = String.raw`\[SNR = ${SNR}\]`;
-        MathJax.typeset();
+        SignalToNoiseRatio = SNR;
+        calcEbNo();
     }
 
     get noiseLevel() {

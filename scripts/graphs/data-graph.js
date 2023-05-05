@@ -9,6 +9,7 @@ class DataGraph extends Graph {
     set timePeriod(newTimePeriod) {
         this._timePeriod = newTimePeriod;
         replotAllGraphs();
+        calcEbNo();
     }
 
     get timePeriod () {

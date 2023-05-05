@@ -31,4 +31,5 @@ class EncodedDataGraph extends DataGraph {
 function updateEncodingFunction(newEncodingFunction) {
     encodedWave.codingFunction = newEncodingFunction;
     replotAllGraphs();
+    calcEbNo();
 }

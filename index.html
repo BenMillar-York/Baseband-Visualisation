@@ -44,7 +44,7 @@
                 <h4>Non-return-to-zero level</h4>
                 <div>
                     <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                        <h5>Time period</h5>
+                        <h5>Bit period</h5>
                         <h4 id="TimeperiodLabel">\[T = 1s\]</h4>
                         <input type="range" autocomplete="off" min="10" max="200" value="100" class="slider Wave2slider" id="dataWaveTimePeriod" oninput="dataWave.timePeriod = Math.round(value); document.getElementById('TimeperiodLabel').innerText = String.raw`\[T = ${value/100}s\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="dataWave.timePeriod = Math.round(100); value = 100; document.getElementById('TimeperiodLabel').innerText = String.raw`\[T = 1s\]`; MathJax.typeset();">
                     </div>
@@ -63,7 +63,7 @@
 
         <div style="display: flex;">
             <div class="left-menu">
-                <h4>Encoded</h4>
+                <h4>Encoding scheme</h4>
                 <div class="dropdown">
                     <button class="dropbtn">
                         <label id="selected-encoding-scheme-label">Non-return-to-zero mark</label>
@@ -86,12 +86,12 @@
 
         <div style="display: flex;">
             <div class="left-menu">
-                <h4>Fourier</h4>
+                <h4>Frequency Content</h4>
                 <div>
                     <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                        <h5>Brick Filter Threshold:</h5>
-                        <h4 id="FrequencyThresholdLabel">\[f(k<50Hz) = 0\]</h4>
-                        <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}Hz) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}Hz) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
+                        <h5>Brick-wall low-pass filter threshold:</h5>
+                        <h4 id="FrequencyThresholdLabel">\[f(k<50 \text{ Hz}) = 0\]</h4>
+                        <input type="range" autocomplete="off" min="5" max="650" value="50" class="slider Wave3slider" id="dataWaveFrequencyThreshold" oninput="inverseFourierWave.filterThreshold = value; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}\text{ Hz}) = 0\]`; MathJax.typeset();" style="margin-left:10px" ondblclick="value = 50; document.getElementById('FrequencyThresholdLabel').innerText = String.raw`\[f(k > ${value}\text{ Hz}) = 0\]`; MathJax.typeset(); dataWave.needsInverseFourierRefresh = true; dataWave.frequencyThreshold = Number(value); ">
                     </div>
                 </div>
             </div>
@@ -102,12 +102,12 @@
 
         <div style="display: flex;">
             <div class="left-menu">
-                <h4>Inverse Fourier</h4>
+                <h4>Filtered signal</h4>
                 <div>
                     <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
                         <h5>Gaussian Noise</h5>
-                        <h4 id="NoiseLabel">\[SNR = Infinity\]</h4>
-                        <input type="range" autocomplete="off" min="0" max="1" value="0" step="0.01" class="slider Wave4slider" id="dataWaveTimePeriod" oninput="inverseFourierWave.noiseLevel = value;" style="margin-left:10px" ondblclick="value = 0; inverseFourierWave.noiseLevel = value;">
+                        <h4 id="NoiseLabel">\[SNR = 100\]</h4>
+                        <input type="range" autocomplete="off" min="0.01" max="1" value="0" step="0.01" class="slider Wave4slider" id="dataWaveTimePeriod" oninput="inverseFourierWave.noiseLevel = value;" style="margin-left:10px" ondblclick="value = 0; inverseFourierWave.noiseLevel = value;">
                     </div>
                 </div>
             </div>
@@ -118,13 +118,17 @@
         <div style="display: flex;">
             <div class="left-menu">
                 <h4>Eye Diagram</h4>
+                <br>
+                <h5>Energy per bit to noise  </h5>
+                <h5>power spectral density ratio</h5>
+                <h4 id="EbNoLabel">\[\frac{Eb}{N_0} = 100 \text{ db}\]</h4>
             </div>
             <canvas id="eyeDiagramCanvas"></canvas>
         </div>
 
         <div style="display: flex;">
             <div class="left-menu">
-                <h4>Demodulated</h4>
+                <h4>Demodulated signal</h4>
             </div>
             <canvas id="demodulatedCanvas"></canvas>
         </div>
@@ -132,7 +136,7 @@
         
         <div style="display: flex;">
             <div class="left-menu">
-                <h4>Decoded</h4>
+                <h4>Decoded signal</h4>
             </div>
             <canvas id="decodedCanvas"></canvas>
         </div>

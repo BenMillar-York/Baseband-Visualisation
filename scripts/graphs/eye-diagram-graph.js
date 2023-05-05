@@ -56,3 +56,11 @@ class EyeDiagramGraph extends InverseFourierGraph {
         }
     }
 }
+
+function calcEbNo() {
+    let SNR = SignalToNoiseRatio;
+    let EbNo = SNR * encodedWave.timePeriod / 100 * SAMPLES_PER_BIT / 2  * inverseFourierWave.filterThreshold / inverseFourierWave.data.length;
+    EbNo = EbNo.toFixed(2);
+    document.getElementById('EbNoLabel').innerText = String.raw`\[\frac{Eb}{N_0} = ${EbNo}\text{ dB}\]`;
+    MathJax.typeset();
+}
