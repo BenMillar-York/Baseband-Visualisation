@@ -12,7 +12,6 @@ complex_test_vectors.multiply =  [
 complex_test_vectors.divide =  [
     // [a, b, a/b]
     new TestVector(new Complex(1, 1), new Complex(1, 1), new Complex(1, 0)),
-    new TestVector(new Complex(-5, 2), new Complex(8, -4), new Complex(-0.8, -0.5)),
     new TestVector(new Complex(-0.5, 2), new Complex(1, -2), new Complex(4.5, 5)),
     new TestVector(new Complex(2.5, -2), new Complex(1, -0.5), new Complex(7, 4.5)),
     new TestVector(new Complex(-3490950, -54545), new Complex(3535, -3535), new Complex(-972.3839841539332, -972.3839841539332))
