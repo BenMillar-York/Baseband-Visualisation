@@ -2,8 +2,8 @@ let numberOfTests = 1;
 
 class EndToEndTest {
 
-    constructor () {
-        this.testNumber = numberOfTests;
+    constructor (testNumber) {
+        this.testNumber = testNumber;
         numberOfTests += 1;
     }
 
@@ -88,7 +88,7 @@ let endToEndTest1 = {
 }
 
 function run_end_to_end_test_1() {
-    let endToEndTest1 = new EndToEndTest();
+    let endToEndTest1 = new EndToEndTest(1);
     endToEndTest1.encodingScheme = manchester;
     endToEndTest1.timePeriod = 200;
     endToEndTest1.data = [1, 0, 1, 0, 1];
@@ -97,4 +97,17 @@ function run_end_to_end_test_1() {
 
     endToEndTest1.expectedOutput = [1, 0, 1 ,0, 1];
     endToEndTest1.evaluateAndOutputTest();
+}
+
+
+function run_end_to_end_test_2() {
+    let endToEndTest2 = new EndToEndTest(2);
+    endToEndTest2.encodingScheme = mlt3;
+    endToEndTest2.timePeriod = 200;
+    endToEndTest2.data = [1, 1, 1, 1, 0, 0, 0, 0, 0];
+    endToEndTest2.filterThreshold = 60;
+    endToEndTest2.gaussianNoise = 0;
+
+    endToEndTest2.expectedOutput = [1, 0, 0 ,1, 1, 1, 0, 0, 0];
+    endToEndTest2.evaluateAndOutputTest();
 }
