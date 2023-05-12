@@ -76,3 +76,17 @@ mjx-container[jax="CHTML"][display="true"] {
   font-weight: 400;
   font-size: 1.4vh;
 }
+
+.horizontalMenu {
+  display: flex;
+  justify-content: space-between;
+  min-width: 160px;
+  max-width: 20vw;
+  flex-direction: row;
+}
+
+#InvertMenu {
+  margin-top: 7px;
+  display: flex;
+  flex-direction: row;
+}

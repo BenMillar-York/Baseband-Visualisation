@@ -29,6 +29,8 @@ function init() {
 
     dataWave.data = generateRandomData(64, 0.5);
 
+    document.getElementById('InvertMenu').addEventListener("mouseup", invertCurrentData);
+
     invertColourScheme();
 }
 

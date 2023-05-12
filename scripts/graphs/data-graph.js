@@ -35,11 +35,28 @@ class DataGraph extends Graph {
     }
 }
 
+function shouldDataBeInverted(){
+    return document.getElementById('invertCheckbox').checked;
+}
+
+function invertData(data) {
+    let invertedData = [];
+    data.forEach(dataPoint => {
+        invertedData.push(!dataPoint);
+    });
+    return invertedData;
+}
+
 function generateRandomData(n, probability1) {
     let data = []
     for (let i = 0; i < n; i++) {
         data.push(Math.random() < probability1);
     }
+
+    if (shouldDataBeInverted()){
+        return invertData(data);
+    }
+
     return data;
 }
 
@@ -49,5 +66,10 @@ function updateProbability(probability1) {
     dataWave.data = [];
     dataWave.data = generateRandomData(64, probability1);
     DataProbability1 = probability1;
+    fourierWaveDisplay.resetData();
+}
+
+function invertCurrentData() {
+    dataWave.data = invertData(dataWave.data);
     fourierWaveDisplay.resetData();
 }

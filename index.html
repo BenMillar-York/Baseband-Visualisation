@@ -54,7 +54,13 @@
                 <div>
                     <h5>Entropy</h5>
                     <div class="input-menu" onmouseover="displayAllTimePeriods = false" onmouseout="displayAllTimePeriods = false">
-                        <h4 id="P1Label">\[P(1) = 0.5\]</h4>
+                        <div class="horizontalMenu">
+                            <h4 id="P1Label">\[P(1) = 0.5\]</h4>
+                            <div id="InvertMenu">
+                                <input type="checkbox" id="invertCheckbox" name="invertCheckbox">
+                                <label for="invertCheckbox" style="margin-left:7px; font-style: normal; font-weight: 400; font-size: 1.6vh;">Invert</label>
+                            </div>
+                        </div>
                         <input type="range" autocomplete="off" min="0" max="0.5" value="0.5" step="0.01" class="slider Wave1slider" id="dataWaveProbability" oninput='updateProbability(value); roundedProbability=Math.round( value * 100 ) / 100;' style="margin-left:10px" ondblclick="value = 0.5; updateProbability(value)">
                     </div>
                 </div>
